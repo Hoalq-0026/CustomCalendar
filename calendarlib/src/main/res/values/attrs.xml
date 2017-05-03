@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="DayPickerView">
+    <declare-styleable name="DatePickerView">
         <attr format="color" name="colorCurrentDay"/>
         <attr format="color" name="colorSelectedDayBackground"/>
         <attr format="color" name="colorSelectedDayText"/>
@@ -17,8 +17,8 @@
         <attr format="dimension" name="calendarHeight"/>
         <attr format="boolean" name="enablePreviousDay"/>
         <attr format="boolean" name="currentDaySelected"/>
-        <attr format="boolean" name="drawRoundRect"/>
         <attr format="boolean" name="enableMultiSelect"/>
+        <attr format="boolean" name="enableDaySelect"/>
         <attr format="enum" name="firstMonth">
             <enum name="january" value="1"/>
             <enum name="february" value="2"/>

@@ -1,9 +1,14 @@
 package com.krkproduce.calendarlib;
 
+import com.krkproduce.calendarlib.model.CalendarDay;
+import com.krkproduce.calendarlib.model.SelectedDays;
+import java.util.ArrayList;
+
 public interface DatePickerController {
 
-    void onDayOfMonthSelected(int year, int month, int day);
+    void onDayOfMonthSelected(CalendarDay selectedDay);
 
-    void onDateRangeSelected(
-            final SimpleMonthAdapter.SelectedDays<SimpleMonthAdapter.CalendarDay> selectedDays);
+    void onDaysSelected(ArrayList<CalendarDay> selectedDays);
+
+    void onFirstDayOfMonthScrolled(CalendarDay firstDay);
 }

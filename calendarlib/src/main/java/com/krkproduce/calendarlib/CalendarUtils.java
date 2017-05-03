@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CalendarUtils {
-    public static final String DATE_FORMAT_YYYY_MM_JAPANESE = "yyyy年MM月";
+    public static final String DATE_FORMAT_YYYY_MM_JAPANESE = "yyyy年 MM月";
 
     public static int getDaysInMonth(int month, int year) {
         switch (month) {

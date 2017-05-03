@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">CustomCalendar</string>
+    <string name="icon_done_all">&#xf382;</string>
+    <string name="icon_clear_all">&#xE14C;</string>
+
+    <!-- fonts using in app -->
+    <string name="font_hiragino_w3">HiraginoSans-W3.ttc</string>
+    <string name="font_hiragino_w4">HiraginoSans-W4.ttc</string>
+    <string name="font_hiragino_w5">HiraginoSans-W5.ttc</string>
+    <string name="font_hiragino_w6">HiraginoSans-W6.ttc</string>
+    <string name="font_hiragino_w7">HiraginoSans-W7.ttc</string>
+    <string name="font_ion">ionicons.ttf</string>
 </resources>

@@ -1,18 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.krkproduce.customcalendar.MainActivity"
     >
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="presenter"
+            type="com.krkproduce.customcalendar.MainPresenter"
+            />
+    </data>
+    <RelativeLayout
 
-    <com.krkproduce.calendarlib.DayPickerView
-        android:id="@+id/pickerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:drawRoundRect="false"
-        ></com.krkproduce.calendarlib.DayPickerView>
+        tools:context="com.krkproduce.customcalendar.MainActivity"
+        >
+        <RelativeLayout
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="#5bafa2"
+            >
 
-</android.support.constraint.ConstraintLayout>
+            <ImageView
+                android:id="@+id/multi_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="60dp"
+                android:gravity="center"
+                android:onClick="@{()->presenter.enableMultiDateSelect()}"
+                android:src="@drawable/ic_multi_select"
+                />
+            <ImageView
+                android:id="@+id/clear_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:onClick="@{()->presenter.clearAllDateSelected()}"
+                android:src="@drawable/ic_clear_multi_select"
+                />
+        </RelativeLayout>
+        <com.krkproduce.calendarlib.DayPickerView
+            android:id="@+id/day_picker_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_layout"
+            android:background="@android:color/white"
+            app:enableDaySelect="true"
+            />
+
+        <RelativeLayout
+            android:id="@+id/footer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:visibility="gone"
+            >
+            <TextView
+
+                android:id="@+id/title_footer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="#f7f7f7"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="@{presenter.selectedDateTitle}"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:text="2017年4月23日(金)"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_footer_layout"
+                android:gravity="left"
+                android:paddingTop="5dp"
+                android:text="@{presenter.listDayString}"
+                android:textColor="#929292"
+                android:textSize="14sp"
+                android:visibility="@{presenter.isEnableMultiDateSelect ? View.VISIBLE: View.GONE}"
+                />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

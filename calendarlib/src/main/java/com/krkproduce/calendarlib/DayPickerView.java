@@ -6,31 +6,33 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import com.krkproduce.calendarlib.model.CalendarDay;
+import com.krkproduce.calendarlib.model.Event;
+import java.util.ArrayList;
 
 public class DayPickerView extends RecyclerView {
 
     protected Context mContext;
     protected SimpleMonthAdapter mAdapter;
     private DatePickerController mController;
-    protected int mCurrentScrollState = 0;
-    protected long mPreviousScrollPosition;
-    protected int mPreviousScrollState = 0;
     private TypedArray typedArray;
     private OnScrollListener onScrollListener;
 
     public DayPickerView(Context context) {
         this(context, null);
+        init(context);
     }
 
     public DayPickerView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
+        init(context);
     }
 
     public DayPickerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         if (!isInEditMode()) {
-            typedArray = context.obtainStyledAttributes(attrs, R.styleable.DayPickerView);
+            typedArray = context.obtainStyledAttributes(attrs, R.styleable.DatePickerView);
             setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             init(context);
         }
@@ -48,6 +50,7 @@ public class DayPickerView extends RecyclerView {
         setUpListView();
 
         onScrollListener = new OnScrollListener() {
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -55,9 +58,9 @@ public class DayPickerView extends RecyclerView {
                 if (child == null) {
                     return;
                 }
-
-                mPreviousScrollPosition = dy;
-                mPreviousScrollState = mCurrentScrollState;
+                if (mController != null) {
+                    mController.onFirstDayOfMonthScrolled(child.getFirstDayOfMonth());
+                }
             }
         };
     }
@@ -75,23 +78,33 @@ public class DayPickerView extends RecyclerView {
         setFadingEdgeLength(0);
     }
 
-    public SimpleMonthAdapter.SelectedDays<SimpleMonthAdapter.CalendarDay> getSelectedDays() {
-        return mAdapter.getSelectedDays();
+    public ArrayList<CalendarDay> getSelectedDayList() {
+        return mAdapter.getSelectedDayList();
     }
 
     protected DatePickerController getController() {
         return mController;
     }
 
+    public void setIsEnableMultiDaySelected(boolean isEnable) {
+        if (mAdapter != null) {
+            mAdapter.setEnableMultiDaySelect(isEnable);
+        }
+    }
+
+    public void removeAllSelectedDays() {
+        if (mAdapter != null) {
+            mAdapter.removeAllSelectedDays();
+        }
+    }
+
     protected TypedArray getTypedArray() {
         return typedArray;
     }
 
-    public void setReservationClosedDay(SimpleMonthAdapter.CalendarDay closedDay) {
-        mAdapter.setReservationClosedDay(closedDay);
-    }
-
-    public void setReservationInquiryDay(SimpleMonthAdapter.CalendarDay inquiryDay) {
-        mAdapter.setReservationInquiryDay(inquiryDay);
+    public void setEvents(ArrayList<Event> events) {
+        if (mAdapter != null) {
+            mAdapter.setEvents(events);
+        }
     }
 }
